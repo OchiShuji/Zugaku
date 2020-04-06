@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> Format for Report </title>
+</head>
+<body bgcolor="#ffffff">
+<basefont size="2">
+
+<h3>
+アニメーションとマウス入力 (第 10 回)
+</h3>
+
+<div align="right"> <table>
+<tr><th align="left"> 氏名       <td align="left"> 越智 秀次
+<tr><th align="left"> クラス     <td align="left"> 理 科 一 類 11 組
+<tr><th align="left"> 学生証番号 <td align="left"> J4-170235
+</table> </div>
+
+<h3>
+□課題10.1 - 13.2節 例 1: 物体の回転プログラム - ObjectRotate.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+<h3>
+□課題10.2 - 13.2節 例 2: 立方体の回転プログラム - CubeRotate.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMBP:Chap13 ochihideji$ java CubeRotate
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubeRotate.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+<h3>
+□課題10.3 - 13.2節 例 3: 物体の回転アニメーション - ObjectSpin.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+<h3>
+□課題10.4 - 13.2節 例 4: 立方体の回転アニメーション - CubeSpin.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMBP:Chap13 ochihideji$ java CubeSpin
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubeSpin.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+<h3>
+□課題10.5 - 章末課題: 回転速度の変更 - DumpingSpin.java / DumpingCubeSpin.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src=".png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+<h3>
+□課題10.6 - 章末課題: 回転速度の対話的な調整 - WheelSpin.java / WheelCubeSpin.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src=".png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+<h3>
+□課題10.7 - 自習課題: フラクタル立体の回転アニメーション - SierpinskiSpin.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+public class SierpinskiSpin extends ObjectSpin {
+    public static void main(String[] args) {
+        if (args.length == 0) 
+            System.err.println("Usage: java SierpinskiSpin #iteration");
+        else 
+            (new SierpinskiSpin("Sierpinski Spin", Integer.parseInt(args[0]))).showFrame();
+    }
+
+    protected SierpinskiSpin(String name, int times) {
+        super(name);
+        object = new Sierpinski(times);
+    }
+}
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMBP:Chap13 ochihideji$ java SierpinskiSpin 3
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="SierpinskiSpin.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+
+</blockquote>
+<p>
+
+
+<h3>
+□課題や授業に関して
+</h3>
+<h4> ○レポート作成に要した時間 </h4>
+<blockquote>
+4時間程度
+</blockquote>
+<p>
+<h4> ○特に苦労した点 </h4>
+<blockquote>
+???
+</blockquote>
+<p>
+<h4> ○授業についての感想や希望 </h4>
+<blockquote>
+???
+</blockquote>
+<p>
+
+</body>
+</html>

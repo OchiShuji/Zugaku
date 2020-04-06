@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> Format for Report </title>
+</head>
+<body bgcolor="#ffffff">
+<basefont size="2">
+
+<h3>
+同次座標と行列計算 (第 8 回)
+</h3>
+
+<div align="right"> <table>
+<tr><th align="left"> 氏名       <td align="left"> 越智　秀次
+<tr><th align="left"> クラス     <td align="left"> 理 科 一 類 11 組
+<tr><th align="left"> 学生証番号 <td align="left"> J4-170235
+</table> </div>
+
+<h3>
+□課題8.1 - 11.3節 例 1: 透視投影による立方体の描画 - CubeMatrix.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap11 ochihideji$ java CubeMatrix
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubeMatrix.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+gluPerspective()で設定するアスペクト比をglViewport()で指定したビューポートの縦横比と一致させなければ、ウィンドウサイズの変更に伴って図形自体が歪んでしまう。例えば、 glu.gluPerspective(fieldOfView, 1, near, far)などとすると、初期状態では正しく図形が描かれるが、ウィンドウサイズを横に引き伸ばすと図形も横に引き延ばされる。
+<p><img src="歪み.png" WIDTH="50%"></p>
+</blockquote>
+<p>
+
+<h3>
+□課題8.2 - 11.3節 例 2: 角度指定による立方体の描画 - CubeAngle.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap11 ochihideji$ java CubeAngle
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubeAngle.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+このプログラムでは引数を与えていくら視点位置を変更したとしても、視心は常に原点にある。
+</blockquote>
+<p>
+
+<h3>
+□課題8.3 - 章末課題:視点位置
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+例2に同じ
+</pre> </code>
+<h4> ○実行コマンド </h4>
+ochihidejinoMacBook-Pro:Chap11 ochihideji$ java CubeAngle <引数> (引数については実行結果参照)
+<samp> <pre>
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="VisionPoint.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+プログラムをみてわかるように、コマンドの実行時に与える引数の数によって画角、クリッピング面の位置、視点位置のいずれの値を指定するかが変わ
+る。(CubeAngle.javaの20-30行目より) ここでは変数を3つ与えて視点位置を変更する。実行結果は写真の3段目以下で、与えた引数は教科書P89 図11.4に同じである。
+</blockquote>
+<p>
+
+<h3>
+□課題8.4 - 章末課題:画角とクリッピング面の効果
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+例2に同じ
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap11 ochihideji$ java CubeAngle <引数> (引数については実行結果参照)
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="VisionPoint.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+引数を1つ与えて画角を、2つ与えてクリッピング面の位置を指定する。画角について、一般に人の目の視野角に比して著しく大きい視野角で透視投影を行うと(広角レンズを用いると)、画面の端の部分が大きく歪んで見える。
+</blockquote>
+<p>
+
+<h3>
+□課題や授業に関して
+</h3>
+<h4> ○レポート作成に要した時間 </h4>
+<blockquote>
+3時間程度
+</blockquote>
+<p>
+<h4> ○特に苦労した点 </h4>
+<blockquote>
+透視投影に関する内容は図形科学Aで扱ったが、忘れている部分が多かったので復習し直した。
+</blockquote>
+<p>
+<h4> ○授業についての感想や希望 </h4>
+<blockquote>
+JOGLに入ってから自主課題に取り組めていないので、ウェブなどで調べてJOGLについての理解を深められるような自主課題に取り組んで行きたいと思います。
+</blockquote>
+<p>
+
+</body>
+</html>

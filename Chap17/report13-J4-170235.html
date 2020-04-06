@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> Format for Report </title>
+</head>
+<body bgcolor="#ffffff">
+<basefont size="2">
+
+<h3>
+シェーディング (第 13 回)
+</h3>
+
+<div align="right"> <table>
+<tr><th align="left"> 氏名       <td align="left"> 越智 秀次
+<tr><th align="left"> クラス     <td align="left"> 理 科 1 類 11 組
+<tr><th align="left"> 学生証番号 <td align="left"> J4-170235
+</table> </div>
+
+<h3>
+□課題13.1 - 17.4節 例 1 ~ 5: 基本プログラムと立方体のシェーディング表示
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap17 ochihideji$ java CubeShade
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubeShade.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+光源位置を(5,5,0)から無限遠に変更してみる(すなわちLight.javaの8行目のコメントアウトを外し7行目をコメントアウトする)と、実行結果は
+以下のようになる。左側は光源位置が無限遠、右側は光源位置がデフォルトの場合である。立方体の回転角度はほぼ同じであるが、右側の方は入射光の鏡面成分によって面が白く表示されているのに対し、左側の方はそのようになっていない。このような光源位置が無限遠であるような光源は平行光線の光源となり、太陽光の表現などに用いられる。<p><img src="compare.png" WIDTH="50%">
+</blockquote>
+<p>
+
+<h3>
+□課題13.2 - 17.4節 例 6,7: 正二十面体のシェーディング表示 - ShadingIcosahedron.java / IcosahedronShade.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap17 ochihideji$ java IcosahedronShade
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="IS.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+鏡面反射の減衰係数を100分の1にすると下のような表示になり鏡面反射によって明るくなっている部分がかなり広くなることが確認できる。
+<p><img src="SpecularHigh.png" WIDTH="25%">
+</blockquote>
+<p>
+
+<h3>
+□課題13.3 - 17.4節 例 8,9: 近似球面のシェーディング表示 - ShadingSubdivision.java / SubdivisionShade.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap17 ochihideji$ java SubdivisionShade 4
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="SS.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+シュブルール錯視に似た錯視として「マッハバンド」がある。濃淡がわずかに異なるグレーの領域が２つ隣接した時、それらの境界付近で暗い方の領域はより暗く、明るい方の領域はより明るく強調されて見える。これによってマッハバンドではバンド上に実際には存在しないはずの明度勾配を持った領域が出現する。錯視の原理はシュブルール錯視も同じであるが、結果的に引き起こされる現象は両者の間で異なる。
+
+</blockquote>
+<p>
+
+<h3>
+□課題13.4 - 17.4節 例 10,11: 近似球面のスムーズシェーディング表示 - SphereShade.java / ShadingSphere.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap17 ochihideji$ java SphereShade 4
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="SpS.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+このプログラムでは法線ベクトルが頂点に割り当てられているので、回転中に鏡面反射が極めて限られた角度で起こりやや不自然に見える(面ではなく頂点に対して反射しているように見える)。再帰回数を0にして実行するとよくわかる。
+</blockquote>
+<p>
+
+<h3>
+□課題13.5 - 章末課題: 正二十面体片のシェーディング表示 - ShadingIcosahedronFractal.java / IcosahedronFractalShade.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+<h4> ShadingIcosahedronFractal.java </h4>
+public class ShadingIcosahedronFractal extends FractalObject {
+    protected ShadingIcosahedronFractal(int times) {
+        super(times);
+
+        primitive = new ShadingIcosahedron();
+        int nv = primitive.vertices();
+        float phi = (float)(1 + Math.sqrt(5)) / 2;
+        s = 1.0 / (1.0 + phi);
+        v = new double[nv][3];
+        for (int i = 0; i < nv; i ++)
+          for (int j = 0; j < 3; j++)
+            v[i][j] = primitive.vertex(i, j) * (1.0 - s);
+    }
+}
+<h4> IcosahedronFractalShade.java </h4>
+public class IcosahedronFractalShade extends ObjectShade {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.err.println("Usage: IcosahedronFractalShade #iteration");
+        }
+        else {
+            (new IcosahedronFractalShade("IcosahedronFractalShade", Integer.parseInt(args[0]))).showFrame();
+        }
+    }
+
+    protected IcosahedronFractalShade(String name, int times) {
+        super(name);
+        object = new ShadingIcosahedronFractal(times);
+    }
+}
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap17 ochihideji$ java IcosahedronFractalShade 3
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="IFS.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+プログラムとしてはフラクタル立体の描画に用いたプログラムのprimitiveとして本章で作成したIcosahedronshadeを登録するだけなので単純である。
+</blockquote>
+<p>
+
+<h3>
+□課題13.6 - 章末課題: メンガースポンジのシェーディング表示 - ShadingMengerSponde.java / MengerSpongeShade.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+<h4> ShadingMengerSponde.java </h4>
+<h4> MengerSpongeShade.java </h4>
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap17 ochihideji$ java MengerSpongeShade 3
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="MSS.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+影の表現がないため、鏡面反射の起こる角度では穴の奥も非常に明るく表示されていまいメンガースポンジの様子がわかりにくくなる。
+</blockquote>
+<p>
+    
+
+<h3>
+□課題や授業に関して
+</h3>
+<h4> ○レポート作成に要した時間 </h4>
+<blockquote>
+4時間程度
+</blockquote>
+<p>
+<h4> ○特に苦労した点 </h4>
+<blockquote>
+円柱のシェーディング表示に挑戦しようとしたが、何から取り掛かれば良いのかわからず断念した。
+</blockquote>
+<p>
+<h4> ○授業についての感想や希望 </h4>
+<blockquote>
+授業全体を振り返ってみて、3DCGに関する基本的な事柄はもちろんのこと、プログラミングの基礎やターミナルの扱い方なども学ぶことができてよかったです。プログラミングについてはまだまだ初心者レベルなので、これ以降継続的に学習していきたいと思います。
+</blockquote>
+<p>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title> Format for Report </title>
+</head>
+<body bgcolor="#ffffff">
+<basefont size="2">
+
+<h3>
+JOGLによる3次元グラフィクスのプログラム (第 7 回)
+</h3>
+
+<div align="right"> <table>
+<tr><th align="left"> 氏名       <td align="left"> 越智 秀次
+<tr><th align="left"> クラス     <td align="left"> 理 科 一 類 11 組
+<tr><th align="left"> 学生証番号 <td align="left"> J4-170235
+</table> </div>
+
+<h3>
+□課題7.1 - 8.3節 例 1: JOGLによる直線群の描画(2次元)-Lines.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java Lines
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="Lines.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+これまでウィンドウ座標系ではウィンドウの左上が原点であったが、このJOGLによるグラフィクスではウィンドウの左下が原点となっていることに注意する。
+</blockquote>
+<p>
+
+<h3>
+□課題7.2 - 10.3節 例 1: 透視投影による立方体の描画-CubePosition.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java CubePosition
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubePosition.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+プログラムとグラフィクスパイプラインの対応を確認しながらプログラムを書いた。
+</blockquote>
+<p>
+
+<h3>
+□課題7.3 - 10.3節 例 2: 多角形としての立方体の描画-CubePolygon.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+略
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java CubePolygon
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubePolygon.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+四角形を複数使って立体の描画をする(CubePosition)場合と、１つの多角形によって立体の描画をする(CubePolygon)場合には、描画命令の開始と終了のタイミングが異なることに特に注意が必要である。
+</blockquote>
+<p>
+
+
+<h3>
+□課題7.4 - 章末課題: 視点位置の変更-CubePosition.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+例題プログラムに同じ
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java CubePosition x y z (x, y, z は視点座標値、後述。)
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="CubePosition2.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+視点座標値は写真左上から右方向に(x y z) = (指定なし), (0 0 7), (2 0 7), (4 0 7), (4 1 7), (4 2 7), (4 3 7), (4 -3 7), (7 3 -4), (-4 3 -7), (-4 -3 -7), (-7 3 4) である。
+</blockquote>
+<p>
+
+
+<h3>
+□課題7.5 - 章末課題: 立体データの意味-CubePosition2.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+import java.awt.*;
+import java.awt.event.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.*;
+import javax.media.opengl.awt.*;
+
+public class CubePosition2 extends GLCanvas implements GLEventListener {
+    public static void main(String[] args) {
+        if (args.length == 3)
+          (new CubePosition2("CubePosition2", args)).showFrame();
+        else
+          (new CubePosition2("CubePosition2")).showFrame();
+    }
+
+    private Frame f;
+    protected GL2 gl;
+    protected GLU glu;
+    protected double eye_x = 4.0;
+    protected double eye_y = 3.0;
+    protected double eye_z = 7.0;
+
+    protected CubePosition2(String name) {
+        super();
+        setSize(500, 500);
+        addGLEventListener(this);
+
+        f = new Frame(name);
+        f.add(this);
+        f.pack();
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+
+    protected CubePosition2(String name, String[] args) {
+        this(name);
+        eye_x = Double.parseDouble(args[0]);
+        eye_y = Double.parseDouble(args[1]);
+        eye_z = Double.parseDouble(args[2]);
+    }
+
+    protected void showFrame() {
+        f.setVisible(true);
+    }
+
+    public void init(GLAutoDrawable drawable) {
+        gl = drawable.getGL().getGL2();
+        glu = new GLU();
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        gl.glEnable(GL2.GL_DEPTH_TEST);
+        gl.glEnable(GL2.GL_CULL_FACE);
+    }
+
+    public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
+        final double fieldOfView = 25.0, near = 1.0, far = 20.0;
+        double aspect = (double) w / (double) h;
+
+        gl.glViewport(0, 0, w, h);
+        gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glLoadIdentity();
+        glu.gluPerspective(fieldOfView, aspect, near, far);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        glu.gluLookAt(eye_x, eye_y, eye_z, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    }
+
+    public void display(GLAutoDrawable drawable) {
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        cubeDisplay();
+    }
+
+    static float[][] vertices = { {-1.0f, -1.0f, -1.0f}, {1.0f, -1.0f, -1.0f}, {1.0f, 1.0f, -1.0f}, {-1.0f, 1.0f, -1.0f}, {-1.0f, -1.0f, 1.0f}, {1.0f, -1.0f, 1.0f}, {1.0f, 1.0f, 1.0f}, {-1.0f, 1.0f, 1.0f} };
+    static int[][] faces = { {5, 6, 2, 1}, {2, 3, 7, 6}, {4, 5, 6, 7}, {0, 4, 7, 3}, {0, 1, 5, 4}, {0, 3, 2, 1} };
+    static float[][] colors = { {0.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {0.0f, 0.5f, 0.5f}, {0.5f, 0.0f, 0.5f}, {0.5f, 0.5f, 0.0f} };
+
+    protected void cubeDisplay() {
+        gl.glBegin(GL2.GL_QUADS);
+        for (int i = 0; i < faces.length; i++) {
+            gl.glColor3fv(colors[i], 0);
+            for (int j = 0; j < faces[i].length; j++)
+              gl.glVertex3fv(vertices[faces[i][j]], 0);
+        }
+        gl.glEnd();
+        gl.glFlush();
+    }
+
+    public void dispose(GLAutoDrawable drawable) {
+
+    }
+}
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java CubePosition x y z (x, y, zは視点座標値、後述。)
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+最初の3つはfacesの最初の配列を{1,2,5,6}、後半の3つは{5,6,2,1}としている。視点座標はそれぞれ左から(x,y,z)=(指定なし), (7 0 0), (7 -4 7)としている。
+</pre> </samp>
+<img src="CP2.1256.null.png" WIDTH="15%"><img src="CP2.1256.700.png" WIDTH="15%"><img src="CP2.1256.7-47.png" WIDTH="15%"><img src="CP2.5621.null.png" WIDTH="15%"><img src="CP2.5621.700.png" WIDTH="15%"><img src="CP2.5621.7-47.png" WIDTH="15%">
+<h4> ○考察 </h4>
+<blockquote>
+面の法線ベクトルの向きと頂点を指定する順番が右ねじの関係にあると考えるとわかりやすい。最初の配列を{5,6,2,1}にした場合はその面の法線ベクトルが立方体の内側を向いているので、その面は黒くなってしまう。
+</blockquote>
+<p>
+
+
+<h3>
+□課題7.6 - 章末課題: 立体データの意味-Tetrahedron.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+import java.awt.*;
+import java.awt.event.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.*;
+import javax.media.opengl.awt.*;
+
+public class Tetrahedron extends GLCanvas implements GLEventListener {
+    public static void main(String[] args) {
+        if (args.length == 3)
+          (new Tetrahedron("Tetrahedron", args)).showFrame();
+        else
+          (new Tetrahedron("Tetrahedron")).showFrame();
+    }
+
+    private Frame f;
+    protected GL2 gl;
+    protected GLU glu;
+    protected double eye_x = 4.0;
+    protected double eye_y = 3.0;
+    protected double eye_z = 7.0;
+
+    protected Tetrahedron(String name) {
+        super();
+        setSize(500, 500);
+        addGLEventListener(this);
+
+        f = new Frame(name);
+        f.add(this);
+        f.pack();
+        f.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+
+    protected Tetrahedron(String name, String[] args) {
+        this(name);
+        eye_x = Double.parseDouble(args[0]);
+        eye_y = Double.parseDouble(args[1]);
+        eye_z = Double.parseDouble(args[2]);
+    }
+
+    protected void showFrame() {
+        f.setVisible(true);
+    }
+
+    public void init(GLAutoDrawable drawable) {
+        gl = drawable.getGL().getGL2();
+        glu = new GLU();
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        gl.glEnable(GL2.GL_DEPTH_TEST);
+        gl.glEnable(GL2.GL_CULL_FACE);
+    }
+
+    public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
+        final double fieldOfView = 25.0, near = 1.0, far = 20.0;
+        double aspect = (double) w / (double) h;
+
+        gl.glViewport(0, 0, w, h);
+        gl.glMatrixMode(GL2.GL_PROJECTION);
+        gl.glLoadIdentity();
+        glu.gluPerspective(fieldOfView, aspect, near, far);
+        gl.glMatrixMode(GL2.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        glu.gluLookAt(eye_x, eye_y, eye_z, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    }
+
+    public void display(GLAutoDrawable drawable) {
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        cubeDisplay();
+    }
+
+    static float[][] vertices = { {-1.0f, -1.0f, -1.0f}, {1.0f, 1.0f, -1.0f}, {1.0f, -1.0f, 1.0f}, {-1.0f, 1.0f, 1.0f} };
+    static int[][] faces = { {0, 1, 2}, {1, 3, 2}, {0, 2, 3}, {0, 3, 1} };
+    static float[][] colors = { {0.0f, 1.0f, 1.0f}, {1.0f, 0.0f, 1.0f}, {1.0f, 1.0f, 0.0f}, {1.0f, 0.0f, 0.0f} };
+
+    protected void cubeDisplay() {
+        gl.glBegin(GL2.GL_TRIANGLES);
+        for (int i = 0; i < faces.length; i++) {
+            gl.glColor3fv(colors[i], 0);
+            for (int j = 0; j < faces[i].length; j++)
+              gl.glVertex3fv(vertices[faces[i][j]], 0);
+        }
+        gl.glEnd();
+        gl.glFlush();
+    }
+
+    public void dispose(GLAutoDrawable drawable) {
+
+    }
+}
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java Tetrahedron -4 7 7
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="Tetra-477.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+正四面体であるとわかるような視点位置を探すのにかなり試行錯誤した。
+</blockquote>
+<p>
+
+
+<h3>
+□課題7.7 - 自主課題: 多角形としての正四面体の描画-TetraPolygon.java
+</h3>
+<h4> ○プログラムリスト </h4>
+<code> <pre>
+import javax.media.opengl.*;
+
+public class TetraPolygon extends Tetrahedron {
+    public static void main(String[] args) {
+        if (args.length == 3)
+          (new TetraPolygon("TetraPolygon", args)).showFrame();
+        else
+          (new TetraPolygon("TetraPolygon")).showFrame();
+    }
+
+    protected TetraPolygon(String name) {
+        super(name);
+    }
+
+    protected TetraPolygon(String name, String[] args) {
+        super(name, args);
+    }
+    
+    protected void cubeDisplay() {
+        for (int i = 0; i < faces.length; i++) {
+            gl.glBegin(GL2.GL_POLYGON);
+            gl.glColor3fv(colors[i], 0);
+            for (int j = 0; j < faces[i].length; j++)
+              gl.glVertex3fv(vertices[faces[i][j]], 0);
+            gl.glEnd();
+        }
+        gl.glFlush();
+    }
+}
+</pre> </code>
+<h4> ○実行コマンド </h4>
+<samp> <pre>
+ochihidejinoMacBook-Pro:Chap08&10 ochihideji$ java TetraPolygon -4 7 7
+</pre> </samp>
+<h4> ○実行結果 </h4>
+<samp> <pre>
+</pre> </samp>
+<img src="TetraPolygon.png" WIDTH="50%">
+<h4> ○考察 </h4>
+<blockquote>
+Tetrahedronを拡張することで多角形としての正四面体の描画のプログラムも容易に作成できるので、ついでに作成した。
+</blockquote>
+<p>
+
+
+<h3>
+□課題や授業に関して
+</h3>
+<h4> ○レポート作成に要した時間 </h4>
+<blockquote>
+4時間程度
+</blockquote>
+<p>
+<h4> ○特に苦労した点 </h4>
+<blockquote>
+今までの章と描画の方式が大きく変わったので、プログラムの内容を理解するのに非常に苦労した。本課題の作成につき、細かい部分の理解は後回しにして3次元グラフィクスの実現に必要な最低限の部分の理解に努めた。
+</blockquote>
+<p>
+<h4> ○授業についての感想や希望 </h4>
+<blockquote>
+投影法などについてさらに理解を深めたいと思います。
+</blockquote>
+<p>
+
+</body>
+</html>
